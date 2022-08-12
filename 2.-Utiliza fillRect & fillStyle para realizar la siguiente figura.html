@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FillRect & FillStyle.</title>
+    <style>
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        TU NAVEGADOR NO SOPORTA CANVAS
+    </canvas>
+
+    <script type="text/javascript">
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+
+        //Cuadros
+
+        //Cuadrado 1
+        ctx.fillStyle = "rgb(100,120,200)";
+        ctx.fillRect(10,10,65,65);
+
+        //Cuadrado 2
+        ctx.fillStyle = "rgb(200,0,0)";
+        ctx.fillRect(60,60,65,65);
+
+        //Cuadrado 3
+        ctx.fillStyle = "rgba(430,10,200,0.5)";
+        ctx.fillRect(100,100,65,65);
+    </script>
+</body>
+</html>

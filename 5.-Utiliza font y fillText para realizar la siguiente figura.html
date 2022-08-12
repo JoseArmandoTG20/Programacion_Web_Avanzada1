@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>font y fillText.</title>
+    <style>
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        TU NAVEGADOR NO SOPORTA CANVAS
+    </canvas>
+    <script type="text/javascript">
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+
+        //Text
+        ctx.font = "30px Arial";
+        ctx.fillStyle="blue";
+        ctx.fillText("JOSE ARMANDO",150,30);
+        
+        ctx.strokeStyle="pink";
+        ctx.strokeText("TORRES GARCIA",150,80)
+    </script>
+</body>
+</html>
