@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME.</title>
+    <style>
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        TU NAVEGADOR NO SOPORTA CANVAS
+    </canvas>
+    <script type="text/javascript">
+        var cv = null;
+        var ctx = null;
+        var super_x = 240;
+        var super_y = 240;
+
+        function start(){
+            cv = document.getElementById('mycanvas');
+            ctx = cv.getContext('2d');
+
+            paint();
+        }
+
+        function paint(){
+            window.requestAnimationFrame(paint);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0,0,500,500);
+
+            ctx.fillStyle = random_rgba();
+            ctx.strokeRect(super_x,super_y,40,40);
+            ctx.fillRect(super_x,super_y,40,40);
+
+            update();
+        }
+
+        function update(){
+            super_x += 10;
+            if(super_x > 500){
+                super_x = 0;
+            }
+        }
+        
+        window.addEventListener('load',start);
+
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }());
+
+        function random_rgba() {
+            var o = Math.round, r = Math.random, s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        }
+    </script>
+</body>
+</html>
