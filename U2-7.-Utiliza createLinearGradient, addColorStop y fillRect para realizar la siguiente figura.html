@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>createLinearGradient, addColorStop y fillRect.</title>
+    <style>
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        TU NAVEGADOR NO SOPORTA CANVAS
+    </canvas>
+    <script type="text/javascript">
+        var cv = document.getElementById('mycanvas');
+        var ctx = cv.getContext('2d');
+
+        //Color Gradiente
+        var grd = ctx.createLinearGradient(0,0,120,0);
+        grd.addColorStop(0,"black");
+        grd.addColorStop(0.5,"blue");
+        grd.addColorStop(1,"pink");
+
+        //Rectangulo
+        ctx.fillStyle = grd;
+        ctx.fillRect(0,250,200,80);
+    </script>
+</body>
+</html>
