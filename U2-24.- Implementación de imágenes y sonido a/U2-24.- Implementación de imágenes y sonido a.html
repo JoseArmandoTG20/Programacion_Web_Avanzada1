@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAME.</title>
+    <style>
+        canvas{
+            background-color: white;
+            border: 5px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="500" height="500">
+        TU NAVEGADOR NO SOPORTA CANVAS
+    </canvas>
+    <script type="text/javascript">
+        var cv = null;
+        var ctx = null;
+
+        var player1 = null;
+        var player2 = null;
+        var pared = null;
+
+        var super_x = 240;
+        var super_y = 240;
+
+        var plane = new Image();
+        var gas = new  Image();
+        var clouds = new Image();
+        var sound = new Audio();
+
+        var direction = 'center';
+        var score = 0;
+        var pause = false;
+
+        function start(){
+            cv = document.getElementById('mycanvas');
+            ctx = cv.getContext('2d');
+
+            player1 = new cuadro(super_x,super_y,40,40,'red');
+            player2 = new cuadro(generateRandomInteger(80),generateRandomInteger(80),40,40,'pink');
+
+            pared = new cuadro(90,150,200,40,'grey');
+            plane.src = 'plane1.png';
+            gas.src = 'gas1.png';
+            clouds.src =  'clouds1.png';
+            sound.src = 'car-crash.mp3';
+            paint();
+        }
+
+        function paint(){
+            window.requestAnimationFrame(paint);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0,0,500,500);
+
+            ctx.font = "29px Arial";
+            ctx.fillStyle="black";
+            ctx.fillText("SCORE: "+score,10,35);
+
+            //player1.color = random_rgba();
+            //player1.dibujar(ctx);
+            ctx.drawImage(plane,player1.x,player1.y);
+            ctx.drawImage(gas,player2.x,player2.y);
+            //ctx.drawImage(clouds);
+
+            //player2.dibujar(ctx);
+
+            pared.dibujar(ctx);
+
+            if(!pause){
+                update();
+            }else{
+                ctx.fillStyle = "rgba(0,0,0,0.5)";
+                ctx.fillRect(0,0,500,500);
+
+                ctx.font = "50px Arial";
+                ctx.fillStyle= "white";
+                ctx.fillText("P A U S E",127,268);
+            }
+        }
+
+        function update(){
+            if(direction == 'right'){
+                player1.x += 10;
+                if(player1.x > 500){
+                    player1.x = 0;
+                }
+            }
+
+            if(direction == 'left'){
+                player1.x -= 10;
+                if(player1.x < 0){
+                    player1.x = 500;
+                }
+            }
+
+            if(direction == 'down'){
+                player1.y += 10;
+                if(player1.y > 500){
+                    player1.y = 0;
+                }
+            }
+
+            if(direction == 'up'){
+                player1.y -= 10;
+                if(player1.y < 0){
+                    player1.y = 500;
+                }
+            }
+
+            if(direction == 'center'){
+                player1.y = 230;
+                player1.x = 230;
+            }
+
+            if(player1.se_tocan(player2)){
+                player2.x = generateRandomInteger(400);
+                player2.y = generateRandomInteger(400);
+
+                score += 10;
+                sound.play();
+            }
+
+            if(player1.se_tocan(pared)){
+                if(direction == 'right'){
+                    player1.x -= 10;
+                 }
+
+                if(direction == 'left'){
+                    player1.x += 10;        
+                }
+
+                if(direction == 'down'){
+                    player1.y -= 10;
+                }
+
+                if(direction == 'up'){
+                    player1.y += 10;
+                }
+            }
+        }
+
+        window.addEventListener('load',start);
+
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }());
+
+        function cuadro(x,y,alto,ancho,color){
+            this.x = x;
+            this.y = y;
+            this.alto = alto;
+            this.ancho = ancho;
+            this.color = color;
+
+            this.se_tocan = function (target) { 
+                if(this.x < target.x + target.ancho &&
+                    this.x + this.ancho > target.x && 
+                    this.y < target.y + target.alto&& this.y + this.alto > 
+                    target.y){
+                        return true;  
+                    } 
+                };
+
+            this.dibujar = function(ctx){
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x,this.y,this.alto,this.ancho);
+                ctx.strokeRect(this.x,this.y,this.alto,this.ancho);
+            }
+        }
+
+        document.addEventListener('keydown',function(e){
+            
+            //Arriba
+            if(e.keyCode == 87 || e.keyCode == 38){
+                direction = 'up';
+            }
+
+            //Abajo
+            if(e.keyCode == 83 || e.keyCode == 40){
+                direction = 'down';
+            }
+
+            //Izquierda
+            if(e.keyCode == 65 || e.keyCode == 37){
+                direction = 'left';
+            }
+
+            //Derecha
+            if(e.keyCode == 68 || e.keyCode == 39){
+                direction = 'right';
+            }
+
+            if(e.keyCode == 32){
+                pause = (pause)?false:true;
+            }
+        });
+
+        function random_rgba() {
+            var o = Math.round, r = Math.random, s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        }
+
+        function generateRandomInteger(max) {
+            return Math.floor(Math.random() * max) + 1;
+        }
+    </script>
+</body>
+</html>
