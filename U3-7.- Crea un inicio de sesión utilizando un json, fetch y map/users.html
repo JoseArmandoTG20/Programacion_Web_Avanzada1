@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos</title>
+</head>
+<body>
+    <div id="contenedor">
+        <H1> Bienvenid@ {{ name }}</H1>
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script type="text/javascript">
+        
+        const { createApp } = Vue;
+
+        const { app } = createApp({
+            data() {
+                return {
+                    users: null,
+                    email: "",
+                    password: ""
+                }
+            },
+            methods: {
+                login(e){
+                    var tmp_email = this.email
+                    var tmp_pwd = this.pasword
+                    var acces = this.users.map(function(u){
+                        if(tmp_email == u.email){
+                            if(tmp_pwd = u.password){
+                                var tmp_users ={
+                                    name: u.name,
+                                    username: u.name,
+                                    email: u.email
+                                }
+                                alert("Accesos Correctos")
+                            }
+                        }
+                    })
+                    alert('Datos Incorrectos')
+
+                    e.preventDefault()
+                }
+            },
+            mounted(){
+                var usr = localStorage.getItem('user');
+                usr = JSON.parse(usr);
+                this.usr = usr.name;
+            }
+        }).mount('#contenedor');
+
+    </script>
+</body>
+</html>
