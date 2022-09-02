@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Prueba</title>
+</head>
+<body>
+    <div id="contenedor">
+        <h1>
+            {{ name }}
+        </h1>
+        <p>{{ lastName }}</p>
+        <hr>
+
+        <fieldset>
+            <legend>Calculadora</legend>
+            <input type="number" v-model="number_one">
+            <input type="number" v-model="number_two">
+            <button @click="sumar">
+                Sumar
+            </button>
+            <p>{{ result }}</p>
+        </fieldset>
+    </div>
+
+    <!-- Nos permite editar el DOM sin mayor complejidad -->
+    <!-- Directiva: es todo lo que empieza con v en VueJs -->
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script type="text/javascript">
+        
+        const { createApp } = Vue;
+
+        const { app } = createApp({
+            data() {
+                return {
+                    name: 'Armando',
+                    lastName: 'Torres',
+                    number_one: 0,
+                    number_two: 0,
+                    result: 0,
+                }
+            },
+            methods: {
+                sumar() {
+                    result = this.number_one + this.number_two
+                },
+            },
+        }).mount('#contenedor');
+
+    </script>
+</body>
+</html>
