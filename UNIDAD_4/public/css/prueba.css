@@ -1,21 +1,21 @@
 .container {
-  background-color: aqua;
-  width: 450px;
-  display: flex;
-  margin: 0 auto;
-}
-.container fieldset {
-  border-radius: 10px;
-  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
-}
-.container fieldset form input {
-  background-color: red;
-}
-.container fieldset form button {
-  display: flex;
-  margin: 0 auto;
-  background-color: red;
-  color: white;
-  border-radius: 10px;
-  border: none;
-}
+    background-color: aqua;
+    width: 450px;
+    display: flex;
+    margin: 0 auto;
+  }
+  .container fieldset {
+    border-radius: 10px;
+    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+  }
+  .container fieldset form input {
+    background-color: red;
+  }
+  .container fieldset form button {
+    display: flex;
+    margin: 0 auto;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+  }
