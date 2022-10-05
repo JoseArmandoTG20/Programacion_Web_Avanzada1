@@ -83,6 +83,10 @@
 							<textarea name="features_P"  class="form-control" 
 							id="floatingTextarea2" style="height: 100px"></textarea>
 						</div>
+						<form enctype="multipart/form-data" action="uploader.php" method="POST">
+							<input name="uploadedfile" type="file" />
+							<input type="submit" value="Subir archivo" />
+						</form>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
 								Cerrar
