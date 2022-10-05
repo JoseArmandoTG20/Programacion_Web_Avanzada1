@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#">
+		<a class="navbar-brand" href="../products/index.php">
 		    <img src="../public/img/mando.png" alt="Bootstrap" width="40" height="40">
 		</a>
 

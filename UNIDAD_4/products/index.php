@@ -1,3 +1,9 @@
+<?php 
+	include '../app/ProductController.php';
+	$product = new ProductController;
+	$products = $product -> getProducts();
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,7 +25,7 @@
 							</div>
 							<div class="col">
 								<button data-bs-toggle="modal" data-bs-target="#addProductModal" class=" float-end btn btn-primary">
-									Añadir producto
+									Añadir Producto
 								</button>
 							</div>
 						</div> 
@@ -27,14 +33,13 @@
 					
 					<section>
 						<div class="row">
-							<?php for ($i=0; $i < 12; $i++): ?>
+							<?php foreach ($products as $product): ?>
 								<div class="col-md-4 col-sm-12"> 
 									<div class="card mb-2">
-									<img src="../public/img/jurassic_world_dominion_logo.png" class="card-img-top" alt="...">
+									<img src='<?php echo $product -> cover ?>' class="card-img-top" alt="...">
 										<div class="card-body">
-											<h5 class="card-title">Card title</h5>
-											<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-											<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											<h5 class="card-title"><?php echo $product -> name ?></h5>
+											<p class="card-text"><?php echo $product ->  description ?></p>
 
 											<div class="row">
 												<a data-bs-toggle="modal" data-bs-target="#addProductModal" href="#" class="btn btn-warning mb-1 col-6">
@@ -50,7 +55,7 @@
 										</div>
 									</div>  
 								</div>
-							<?php endfor; ?>
+							<?php endforeach; ?>
 						</div>
 					</section> 
 				</div>
@@ -61,17 +66,22 @@
 		  	<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Añadir Producto</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<form>
 						<div class="modal-body">
-							<?php for ($i=0; $i < 6; $i++): ?>
-								<div class="input-group mb-3">
-									<span class="input-group-text" id="basic-addon1">@</span>
-									<input required type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-								</div>
-							<?php endfor; ?>
+							<label>Nombre:</label>
+							<input name="name_P" type="text" class="form-control"  
+							aria-describedby="addon-wrapping">
+
+							<label>Descripción:</label>
+							<input name="description_P" type="text" class="form-control"  
+							aria-describedby="addon-wrapping">
+
+							<label>Características:</label>
+							<textarea name="features_P"  class="form-control" 
+							id="floatingTextarea2" style="height: 100px"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -81,13 +91,13 @@
 								Guardar Cambios
 							</button>
 						</div>
+						<input type="hidden" value="addProduct" name="action">
 					</form>
 		    	</div>
 		  	</div>
 		</div>
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<?php include'../layouts/scripts.template.php' ?>
 		<script type="text/javascript">
 			function eliminar(target)
 			{
